@@ -1,0 +1,25 @@
+{
+  "name": "nitj-campus-navigator",
+  "version": "1.0.0",
+  "description": "Full-stack campus navigation app for Dr. B. R. Ambedkar NIT Jalandhar",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "campus",
+    "navigation",
+    "nit",
+    "jalandhar"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.3"
+  }
+}

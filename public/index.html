@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIT Jalandhar – Campus Navigator</title>
+  <meta name="description" content="Navigate through the Dr. B. R. Ambedkar NIT Jalandhar campus. Find routes between departments, hostels, and key locations using Google Maps." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    // Inline script to prevent theme flashing on load
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.classList.add("light-theme");
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-animated">
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🗺️</span>
+        <span class="logo-text">NIT<span class="logo-accent">Nav</span></span>
+        <span class="logo-sub">Jalandhar</span>
+      </div>
+      <div class="header-right">
+        <nav class="header-nav">
+          <a href="#navigator" class="nav-link active">Navigate</a>
+          <a href="#locations" class="nav-link">Locations</a>
+          <a href="#about" class="nav-link">About</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Dr. B. R. Ambedkar National Institute of Technology
+      </div>
+      <h1 class="hero-title">
+        Smart Campus<br />
+        <span class="gradient-text">Navigator</span>
+      </h1>
+      <p class="hero-subtitle">
+        Get instant walking & driving directions between any two locations on the NIT Jalandhar campus — powered by Google Maps.
+      </p>
+      <!-- API Status -->
+      <div class="api-status-pill" id="api-status">
+        <span class="api-dot"></span>
+        <span class="api-text">Connecting to server…</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigator Card -->
+  <section id="navigator" class="navigator-section">
+    <div class="navigator-card">
+      <div class="card-header">
+        <div class="card-icon">📍</div>
+        <div>
+          <h2 class="card-title">Campus Navigator</h2>
+          <p class="card-subtitle">Select source &amp; destination to get directions</p>
+        </div>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="category-filter" id="category-filter">
+        <button class="cat-btn active" data-category="all" id="cat-all">All</button>
+        <!-- More buttons populated by JS -->
+      </div>
+
+      <!-- Form -->
+      <form id="navigation-form" class="nav-form" novalidate>
+
+        <!-- Source -->
+        <div class="form-group" id="group-source">
+          <label class="form-label" for="source-select">
+            <span class="label-icon">🟢</span> Starting Point
+          </label>
+          <div class="select-wrapper">
+            <select id="source-select" class="form-select" required>
+              <option value="">— Select your starting location —</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+          <span class="field-error" id="error-source">Please select a starting point.</span>
+        </div>
+
+        <!-- Swap -->
+        <div class="swap-row">
+          <div class="swap-line"></div>
+          <button type="button" id="btn-swap" class="btn-swap" title="Swap source & destination">⇅</button>
+          <div class="swap-line"></div>
+        </div>
+
+        <!-- Destination -->
+        <div class="form-group" id="group-destination">
+          <label class="form-label" for="destination-select">
+            <span class="label-icon">🔴</span> Destination
+          </label>
+          <div class="select-wrapper">
+            <select id="destination-select" class="form-select" required>
+              <option value="">— Select your destination —</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+          <span class="field-error" id="error-destination">Please select a destination.</span>
+        </div>
+
+        <!-- Same location warning -->
+        <div class="alert-banner" id="same-location-alert" style="display:none;">
+          ⚠️ Source and destination cannot be the same location!
+        </div>
+
+        <!-- Navigate Button -->
+        <button type="submit" id="btn-navigate" class="btn-navigate">
+          <span class="btn-icon">🧭</span>
+          <span class="btn-label">Navigate on Google Maps</span>
+          <span class="btn-arrow">→</span>
+        </button>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <button type="button" id="btn-reset" class="btn-ghost">↺ Reset</button>
+          <button type="button" id="btn-main-gate" class="btn-ghost">🚪 Start from Main Gate</button>
+        </div>
+      </form>
+
+      <!-- Route Preview -->
+      <div id="route-preview" class="route-preview" style="display:none;">
+        <div class="route-preview-header">
+          <span class="route-icon">🛣️</span>
+          <span class="route-label">Route Generated</span>
+        </div>
+        <div class="route-stops">
+          <div class="route-stop from">
+            <span class="stop-dot green"></span>
+            <span id="preview-from" class="stop-name">—</span>
+          </div>
+          <div class="route-arrow-line"></div>
+          <div class="route-stop to">
+            <span class="stop-dot red"></span>
+            <span id="preview-to" class="stop-name">—</span>
+          </div>
+        </div>
+        <p class="route-hint">Google Maps opened in a new tab →</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations Grid -->
+  <section id="locations" class="locations-section">
+    <div class="section-header">
+      <h2 class="section-title">📍 All Campus Locations</h2>
+      <p class="section-subtitle">Browse all navigation points on the NIT Jalandhar campus</p>
+    </div>
+    <div class="search-bar-wrapper">
+      <input type="text" id="location-search" class="location-search" placeholder="🔍 Search a location…" autocomplete="off" />
+    </div>
+    <div id="locations-grid" class="locations-grid">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading locations…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about-section">
+    <div class="about-card">
+      <div class="about-icon">🏫</div>
+      <h2 class="about-title">Dr. B. R. Ambedkar<br/>National Institute of Technology</h2>
+      <p class="about-place">Jalandhar, Punjab – 144 011</p>
+      <p class="about-desc">
+        NIT Jalandhar Smart Campus Navigator helps students, faculty, and visitors easily find their way across the 154-acre campus on GT Road, Amritsar Bye-Pass, Jalandhar. Select any two points and get precise directions via Google Maps.
+      </p>
+      <div class="about-stats">
+        <div class="stat-item">
+          <span class="stat-number" id="stat-locations">—</span>
+          <span class="stat-label">Locations</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="stat-depts">—</span>
+          <span class="stat-label">Departments</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">154</span>
+          <span class="stat-label">Acres</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2026 NIT Jalandhar Campus Navigator &nbsp;|&nbsp; Made for NITJ Students &nbsp;|&nbsp; <span id="footer-api">API: <code>/api/locations</code></span></p>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html>
