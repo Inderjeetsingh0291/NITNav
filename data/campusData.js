@@ -5,9 +5,7 @@ const blockCoordinates = {
   // ── Administrative ──────────────────────────────────────
   admin_block: "31.39584990210338, 75.53577719992205",
   director_office: "31.395757531255935, 75.53590838418994",
-  academic_section: "31.39495, 75.53585",
-  placement_cell: "31.39480, 75.53610",
-  exam_cell: "31.39469, 75.53598",
+
 
   // ── Academic Departments ─────────────────────────────────
   cse_dept: "31.395068954423795, 75.53576948723979",
@@ -22,22 +20,23 @@ const blockCoordinates = {
   ice_dept: "31.396150933371963, 75.53689386564817", // Instrumentation & Control Engg
 
   // ── Science & Humanities ─────────────────────────────────
-  physics_dept: "31.39350, 75.53650",
+  physics_dept: "31.39702066647376, 75.53459056204197",
   chemistry_dept: "31.39702066647376, 75.53459056204197",
   maths_dept: "31.397252567662047, 75.53584060555335",
-  humanities_dept: "31.39370, 75.53680",
+  humanities_dept: "31.397347411813232, 75.53445679777575",
 
   // ── Central Facilities ───────────────────────────────────
-  central_library: "31.39400, 75.53680",
-  computer_centre: "31.39380, 75.53710",
-  auditorium: "31.39460, 75.53720",
+  
+  NITJ_Library: "31.39651062453397, 75.53536171988944",
+
+  Central_Seminar_Hall: "31.396277689376824, 75.53446778495783",
   reading_hall: "31.396734259193725, 75.5348263548789",
   Manufacturing_Workshop: "31.39776814416046, 75.53477883646876",
-  nss_office: "31.39490, 75.53560",
-  sports_complex: "31.39150, 75.53600",
-  health_centre: "31.39430, 75.53540",
-  sbi_bank: "31.39420, 75.53510",
-  atm_sbi: "31.39415, 75.53505",
+  
+  sports_complex: "31.396623695050952, 75.53328345602668",
+  Dispensary_NITJ: "31.394193836731215, 75.53756607848071",
+  sbi_bank: "31.393970606003784, 75.5373515017615",
+  atm_sbi: "31.393970606003784, 75.5373515017615",
 
   // ── Hostels ──────────────────────────────────────────────
   hostel_1: "31.39711335081291, 75.53352697376381",
@@ -48,23 +47,20 @@ const blockCoordinates = {
   hostel_6: "31.398443012133598, 75.5363812440316",
   hostel_7: "31.398945821035493, 75.53716962341447",
   hostel_7E: "31.398945821035493, 75.53716962341447",
-  girls_hostel_a: "31.39200, 75.53420",
-  girls_hostel_b: "31.39185, 75.53410",
+  girls_hostel_a: "31.3949702378911, 75.53816202508087",
+  girls_hostel_b: "31.3949702378911, 75.53816202508087",
   Mega_Boys_Hostel_A_Block: "31.39917888840491, 75.53541245569498",
   Mega_Boys_Hostel_B_Block: "31.39935588290885, 75.5361552182012",
   Mega_Boys_Hostel_F_Block: "31.399828901871025, 75.5347929821518",
 
   // ── Food & Social ────────────────────────────────────────
-  main_canteen: "31.39320, 75.53490",
-  hostel_mess: "31.39145, 75.53505",
-  student_amenity: "31.39305, 75.53505",
+
 
   // ── Residences ───────────────────────────────────────────
-  faculty_quarters: "31.39560, 75.53480",
+  
   guest_house: "31.39386495096488, 75.53647025470457",
 
   // ── Near Campus ─────────────────────────────────────────
-  gt_road_bus_stop: "31.39480, 75.53440",
   railway_station: "31.33091189666475, 75.59079364100988", // Jalandhar City Rly Station
 };
 
@@ -72,9 +68,8 @@ const locationLabels = {
   main_gate: "Main Gate",
   admin_block: "Administrative Block",
   director_office: "Director's Office",
-  academic_section: "Academic Section",
-  placement_cell: "Placement Cell (T&P)",
-  exam_cell: "Examination Cell",
+
+
   cse_dept: "Dept. of Computer Science & Engineering",
   it_dept: "Dept. of Information Technology",
   ece_dept: "Dept. of Electronics & Communication Engg",
@@ -90,14 +85,14 @@ const locationLabels = {
   chemistry_dept: "Dept. of Chemistry",
   maths_dept: "Dept. of Mathematics & Computing",
   humanities_dept: "Dept. of Humanities & Management",
-  central_library: "Central Library",
+  NITJ_Library: "NITJ Library",
   Manufacturing_Workshop: "Manufacturing Workshop",
-  computer_centre: "Computer Centre",
-  auditorium: "Auditorium",
+
+  Central_Seminar_Hall: "Central Seminar Hall",
   reading_hall: "Reading Hall",
-  nss_office: "NSS / NCC Office",
+  
   sports_complex: "Sports Complex & Ground",
-  health_centre: "Health Centre",
+  Dispensary_NITJ: "Dispensary NITJ",
   sbi_bank: "SBI Bank Branch",
   atm_sbi: "SBI ATM",
 
@@ -118,13 +113,13 @@ const locationLabels = {
   girls_hostel_b: "Girls Hostel – Block B",
 
 
-  main_canteen: "Main Canteen",
-  hostel_mess: "Hostel Mess",
-  student_amenity: "Student Amenity Centre",
 
-  faculty_quarters: "Faculty Quarters",
+
+ 
+
+ 
   guest_house: "Guest House",
-  gt_road_bus_stop: "GT Road Bus Stop",
+  
   railway_station: "Jalandhar City Railway Station",
 };
 
@@ -132,9 +127,8 @@ const locationCategories = {
   main_gate: "gate",
   admin_block: "admin",
   director_office: "admin",
-  academic_section: "admin",
-  placement_cell: "admin",
-  exam_cell: "admin",
+
+
   cse_dept: "dept",
   it_dept: "dept",
   ece_dept: "dept",
@@ -151,14 +145,13 @@ const locationCategories = {
   chemistry_dept: "dept",
   maths_dept: "dept",
   humanities_dept: "dept",
-  central_library: "facility",
-  computer_centre: "facility",
-  auditorium: "facility",
+  NITJ_Library: "facility",
+
+  Central_Seminar_Hall: "facility",
   reading_hall: "facility",
   Manufacturing_Workshop: "facility",
-  nss_office: "facility",
   sports_complex: "facility",
-  health_centre: "facility",
+  Dispensary_NITJ: "facility",
   sbi_bank: "facility",
   atm_sbi: "facility",
   hostel_1: "hostel",
@@ -176,14 +169,11 @@ const locationCategories = {
 
   girls_hostel_a: "hostel",
   girls_hostel_b: "hostel",
-  main_canteen: "food",
-  hostel_mess: "food",
-  student_amenity: "food",
+
+ 
   director_residence: "residence",
-  faculty_quarters: "residence",
   guest_house: "residence",
 
-  gt_road_bus_stop: "transport",
   railway_station: "transport",
 };
 
